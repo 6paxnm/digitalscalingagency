@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services Page</title>
+    <style>
+        /* General styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        /* Navigation bar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+        }
+
+        .logo {
+            width: 200px;
+            height: 50px;
+        }
+
+        .phone-number {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Hero section styles */
+        .hero {
+            position: relative;
+            height: 400px;
+            background-image: url('hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-text {
+            color: white;
+            text-align: center;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 24px;
+        }
+
+        /* About us section styles */
+        .about-us {
+            padding: 40px 20px;
+            background-color: #f5f5f5;
+        }
+
+        .about-us h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .about-us p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Our services page styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Services section */
+        .services {
+            padding: 40px 20px;
+        }
+
+        .services h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #007bff;
+            font-size: 28px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .services .service {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .services .service img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .services .service h3 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .services .service p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        @media screen and (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer section */
+        .footer {
+            padding: 20px;
+            background-color: #333;
+        }
+
+        .footer .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+        }
+
+        .footer .social-links li {
+            margin: 0 10px;
+        }
+
+        .footer .social-links a {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background-color: white;
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+        }
+
+        .footer .social-links a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .footer p {
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+            font-size: 16px;
+        }
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            height: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            position: relative;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(5px);
+            transform: scale(1.1);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            max-width: 80%;
+        }
+
+        .slide-content h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .slide-content p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 24px;
+            z-index: 2;
+        }
+
+        .slider-btn.left {
+            left: 10px;
+        }
+
+        .slider-btn.right {
+            right: 10px;
+        }
+        .book-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.book-link:hover {
+    background-color: #0056b3;
+}
+.book-container {
+    text-align: right;
+    margin-right: 100px;
+    margin-top: 90px;
+}
+.footer .social-links a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+}
+
+.footer .social-links a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <img src="png/logo-no-background.png" alt="Logo" class="logo">
+            <a href="tel:+1234567890" class="phone-number">077-045-8049</a>
+        </nav>
+    </header>
+
+    <div class="hero" style="background-image: url('zeroth.jpg');">
+        <div class="hero-overlay">
+            <div class="hero-text">
+                <h1>Welcome to Scaling Agency</h1>
+                <p>Your partner in business growth</p>
+                <a href="#" class="book-link">Book with us</a>            </div>
+        </div>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('firstpic.jpg');"></div>
+                <div class="slide-content">
+                    <h2>Why Build a Good Reputation?</h2>
+                    <p>People pay higher prices for the same product or service simply due to brand power. If you want to earn 5-10 times more for the value you provide, join us for free to learn the secret steps of building a huge brand.</p>
+                    <a href="#" class="book-link">Book with us</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('secondpic.jpg');"></div>
+                <div class="slide-content">
+                    <h2>How Can Social Media Marketing Increase My Revenue?</h2>
+                    <p>Your presence on social media is key to capturing your audience's attention. This attention easily leads to sales when combined with proven marketing strategies and advanced AI tools.</p>
+                    <a href="#" class="book-link">Book with us</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('thirdpic.jpg');"></div>
+                <div class="slide-content">
+                    <h2>Is Copywriting Useful?</h2>
+                    <p>It's extremely easy to sell to someone who has already bought from you. Email copywriting is the most effective way to encourage repeat purchases.</p>
+                    <a href="#" class="book-link">Book with us</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('fourth.jpg');"></div>
+                <div class="slide-content">
+                    <h2>Does Website Design Make a Difference?</h2>
+                    <p>With millions of websites offering similar value, it's impossible to stand out unless your website is exceptional. Representing yourself with hidden design tricks will build trust with your audience.</p>
+                    <a href="#" class="book-link">Book with us</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('fifth.jpg');"></div>
+                <div class="slide-content">
+                    <h2>What's the Purpose of Business Planning?</h2>
+                    <p>Without knowing your current position and destination, it's impossible to reach your goals, no matter how hard you work. If you believe you can earn more from your business, it's time to create a specific plan and act on it.</p>
+                    <a href="#" class="book-link">Book with us</a>
+
+                </div>
+            </div>
+        </div>
+        <a href="#" class="slider-btn left">&lt;</a>
+        <a href="#" class="slider-btn right">&gt;</a>
+    </div>
+
+    <div class="container">
+        <div class="services">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service">
+                    <img src="buying-15810_1280.jpg" alt="Service 1">
+                    <h3>Sales Strategy</h3>
+                    <p>We help you design and implement a sales strategy that suits your business goals and target market.</p>
+                </div>
+                <div class="service">
+                    <img src="future-4127468_1280.jpg" alt="Service 2">
+                    <h3>Marketing Automation</h3>
+                    <p>We help you leverage the power of marketing automation to generate more leads and convert them into customers.</p>
+                </div>
+                <div class="service">
+                    <img src="church-film-equipment-5366803_1280.jpg" alt="Service 3">
+                    <h3>Content Creation</h3>
+                    <p>We help you create engaging and valuable content that attracts and educates your audience.</p>
+                </div>
+                <div class="service">
+                    <img src="data-5606639_1280.jpg" alt="Service 4">
+                    <h3>Web Development</h3>
+                    <p>We help you build a stunning and responsive website that showcases your brand and your services.</p>
+                </div>
+                <div class="service">
+                    <img src="business-man-4634538_1280.jpg" alt="Service 5">
+                    <h3>Customer Support</h3>
+                    <p>We help you provide excellent customer support to your clients, using various channels and best practices.</p>
+                </div>
+                <div class="book-container">
+                    <a href="#" class="book-link">Book with us</a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="footer">
+            <ul class="social-links">
+                <li><a href="#"><img src="Instagram_icon.png.webp" alt="Instagram"></a></li>
+                <li><a href="#"><img src="1713419057Facebook_PNG.png" alt="Facebook"></a></li>
+                <li><a href="#"><img src="tiktok-icon-free-png.webp" alt="TikTok"></a></li>
+            </ul>
+            <p>© 2024 Digital Scaling Agency. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const leftBtn = document.querySelector('.slider-btn.left');
+        const rightBtn = document.querySelector('.slider-btn.right');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+        }
+
+        leftBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSlide(currentIndex - 1);
+        });
+
+        rightBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSlide(currentIndex + 1);
+        });
+
+  function getRefParameter() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('ref');
+  }
+
+  function updateBookLinks() {
+    const ref = getRefParameter();
+    if (ref) {
+      const bookLinks = document.querySelectorAll('.book-link');
+      bookLinks.forEach(link => {
+        if (ref.includes('+')) {
+          // It's a WhatsApp number
+          link.href = `https://wa.me/${ref}`;
+        } else {
+          // It's a Telegram username
+          link.href = `https://t.me/${ref}`;
+        }
+      });
+    }
+  }
+
+  // Run this when the page loads
+  updateBookLinks();
+
+    </script>
+</body>
+</html>
